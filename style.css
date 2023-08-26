@@ -1,0 +1,33 @@
+body{
+    height: 100vh;
+    display: grid;
+}
+
+div.gameBoard{
+    align-self: center;
+    justify-self: center;
+    
+    width: 500px;
+    height: 500px;
+    border: 1px solid black;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+div.cell{
+    border: 1px solid black;
+
+    display: flex;
+    justify-content: center;
+    font-size: 130px;
+}
+
+div.playerName{
+    justify-self: end;
+
+    font-size: 50px;
+    font-weight: 700;
+    padding-left: 250px;
+}
