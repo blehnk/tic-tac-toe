@@ -6,6 +6,7 @@ const gameBoard = ( () => {
 
 )();
 
+
 //factory to create players
 const Players = (name, symbol) => {
     return{name, symbol};
@@ -13,6 +14,7 @@ const Players = (name, symbol) => {
 
 const player1 = Players('ash', 'x');
 const player2 = Players('himu', 'o');
+
 
 //module to control the flow of the game
 const flow = ( () => {
@@ -97,9 +99,22 @@ const flow = ( () => {
     }
 
     //logic to stop after filling all the cells of the board and to give chance to both the players
-    while(!winner()){
+    let i = 1;
+    while(!winner() && i == 0){
         chance();
     }
 
 })();
+
+
+
+/*----------------------------------------------------//----------------------DOM MANIPULATION-----------------------//----------------------------------------------*/
+
+const divGameBoard = document.querySelector('.gameBoard');
+for(let i = 0; i < 9; i++){
+    const divCell = document.createElement('div');
+    divCell.className = 'cell';
+    divCell.innerText = 'x';
+    divGameBoard.appendChild(divCell);
+}
 
