@@ -22,18 +22,14 @@ let player2;
 //------------------------------------------------------------------------//----------------------------------------------------------------------------//
 //module to control the flow of the game
 const flow = ( () => {
-
     //function to choose the cell to mark your symbol
     const mark = (player, cell) => {
-
         gameBoard.board[cell] = player.symbol;
         if(winner()){
-            console.log('thanks for playing');
             for(let i = 0; i < 9; i++){
                 dValue[i].removeEventListener('click', chance);
             }  
         };
-        console.log(gameBoard.board);
     }
 
     //function to give chance to players
@@ -47,16 +43,16 @@ const flow = ( () => {
                 console.log(cell);
                 player = player1;
                 flag = 1;
-                pTurn.children[1].innerText = player2.name;
-                e.target.style.color = 'red';
+                pTurn.innerText = player2.name;
+                e.target.style.color = '#e71d36';
             }
             else{
                 cell = e.target.dataset.value;
                 console.log(cell);
                 player = player2;
                 flag = 0;
-                pTurn.children[1].innerText = player1.name;
-                e.target.style.color = 'green';
+                pTurn.innerText = player1.name;
+                e.target.style.color = '#2ec4b6';
             }
             e.target.innerText = player.symbol;
             mark(player, cell);
@@ -97,8 +93,7 @@ const flow = ( () => {
         }
 
         if(win){
-            winMsg.children[0].innerText = 'We Have a WINNER!';
-            winMsg.children[1].innerText = `The winner is ${win}`;
+            pTurn.innerText = `${win} Wins!`;
             return true;
         }
 
@@ -108,8 +103,7 @@ const flow = ( () => {
         }
 
         if(total == 9){
-            winMsg.children[0].innerText = 'You played neck to neck!';
-            winMsg.children[1].innerText = "It's a draw";
+            pTurn.innerText = "It's a draw!";
             return true;
         }
     };
@@ -143,13 +137,12 @@ const flow = ( () => {
             player1 = Players(p1.toUpperCase(), 'x');
             player2 = Players(p2.toUpperCase(), 'o');
 
-            pName.children[0].children[0].innerText = 'Player 1:';
+            pName.children[0].children[0].innerText = 'Player one:';
             pName.children[0].children[1].innerText = player1.name;
-            pName.children[1].children[0].innerText = 'Player 2:';
+            pName.children[1].children[0].innerText = 'Player two:';
             pName.children[1].children[1].innerText = player2.name;  
             
-            pTurn.children[0].innerText = 'Current Player is:'; 
-            pTurn.children[1].innerText = player1.name;
+            pTurn.innerText = player1.name;
 
             for(let i = 0; i < 9; i++){
                 dValue[i].addEventListener('click', chance);

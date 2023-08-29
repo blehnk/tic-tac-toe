@@ -2,38 +2,69 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    --bg-clr: #e8e8e4;
+    --bg2-clr: blue;
+    --hd-clr: #fb5607;
+    --hd2-clr: #ff006e;
+
+    --fo-size: 2rem;
+
 }
 
 body{
     height: 100vh;
-    display: grid;
+    background-color: var(--bg-clr);
 }
 
 div.container{
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: 1fr 3fr;
+
 }
 
 div.pName{
-    font-size: 2rem;
+    font-size: var(--fo-size);
     display: flex;
     flex-direction: column;
     gap: 5px;
+    color: var(--hd-clr);
 }
 
 div.pName div{
     display: flex;
     justify-content: space-between;
     gap: 20px;
+    align-items: center;
+}
+
+div.pName span:last-child{
+    color: var(--hd2-clr);
+    padding: 5px;
+}
+
+
+.header{
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .title{
-    grid-column: 2;
-    grid-row: 1;
     font-size: 4rem;
     justify-self: center;
     align-self: center;
+    color: var(--hd-clr);
+}
+
+.pTurn{
+    font-size: var(--fo-size);
+    color: var(--hd2-clr);
+    padding: 5px;
 }
 
 div.flexContainer{
@@ -44,29 +75,32 @@ div.flexContainer{
     flex-direction: column;
     align-items: flex-end;
     gap: 100px;
+    padding-top: 50px;
+    
 }
 
+div.btn {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 10px;
+}
 .startBtn{
     height: 60px;
     width: 120px;
     font-size: 30px;
+    background-color: #caffbf;
+    color: #ffadad;
 }
 
-.pTurn{
-    font-size: 2rem;
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
+.reStart{
+    height: 60px;
+    width: 200px;  
+    font-size: 30px;
+    background-color: #ffadad;
+    color: #caffbf;
 }
 
-div.winner{
-    grid-column: 3;
-    grid-row: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 2rem;
-}
 
 div.gameBoard{
     grid-column: 2;
@@ -75,7 +109,7 @@ div.gameBoard{
     
     width: 500px;
     height: 500px;
-    border: 1px solid black;
+    padding-top: 50px;
 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -88,6 +122,19 @@ div.cell{
     display: flex;
     justify-content: center;
     font-size: 130px;
+}
+
+div.cell[data-value = '0'], div.cell[data-value = '1'], div.cell[data-value = '2']{
+    border-top: none;
+}
+div.cell[data-value = '0'], div.cell[data-value = '3'], div.cell[data-value = '6']{
+    border-left: none;
+}
+div.cell[data-value = '2'], div.cell[data-value = '5'], div.cell[data-value = '8']{
+    border-right: none;
+}
+div.cell[data-value = '6'], div.cell[data-value = '7'], div.cell[data-value = '8']{
+    border-bottom: none;
 }
 
 div.playerName{
