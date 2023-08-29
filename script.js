@@ -78,16 +78,25 @@ const flow = ( () => {
             if(gameBoard.board[1] == player.symbol && gameBoard.board[2] == player.symbol){
                 win = player.name;
             }
-        }
-
-        if(gameBoard.board[3] == player.symbol){
-            if(gameBoard.board[4] == player.symbol && gameBoard.board[5] == player.symbol){
+            if(gameBoard.board[3] == player.symbol && gameBoard.board[6] == player.symbol){
                 win = player.name;
             }
         }
 
-        if(gameBoard.board[6] == player.symbol){
-            if(gameBoard.board[7] == player.symbol && gameBoard.board[8] == player.symbol){
+        if(gameBoard.board[8] == player.symbol){
+            if(gameBoard.board[7] == player.symbol && gameBoard.board[6] == player.symbol){
+                win = player.name;
+            }
+            if(gameBoard.board[5] == player.symbol && gameBoard.board[2] == player.symbol){
+                win = player.name;
+            }
+        }
+
+        if(gameBoard.board[4] == player.symbol){
+            if(gameBoard.board[0] == player.symbol && gameBoard.board[8] == player.symbol){
+                win = player.name;
+            }
+            if(gameBoard.board[6] == player.symbol && gameBoard.board[2] == player.symbol){
                 win = player.name;
             }
         }
@@ -137,9 +146,9 @@ const flow = ( () => {
             player1 = Players(p1.toUpperCase(), 'x');
             player2 = Players(p2.toUpperCase(), 'o');
 
-            pName.children[0].children[0].innerText = 'Player one:';
+            pName.children[0].children[0].innerText = 'Player one[X]:';
             pName.children[0].children[1].innerText = player1.name;
-            pName.children[1].children[0].innerText = 'Player two:';
+            pName.children[1].children[0].innerText = 'Player two[O]:';
             pName.children[1].children[1].innerText = player2.name;  
             
             pTurn.innerText = player1.name;
