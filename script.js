@@ -18,39 +18,46 @@ const player2 = Players('himu', 'o');
 
 //module to control the flow of the game
 const flow = ( () => {
+
     //function to choose the cell to mark your symbol
     const mark = (player, cell) => {
-        if(gameBoard.board[cell] == 'NULL'){
-            console.log('error');
-        }
-        else{
-            gameBoard.board[cell] = player.symbol;
-        }
+
+        gameBoard.board[cell] = player.symbol;
+        if(winner()){
+            console.log('thanks for playing');
+            for(let i = 0; i < 9; i++){
+                dValue[i].removeEventListener('click', chance);
+            }  
+        };
+        console.log(gameBoard.board);
     }
 
     //function to give chance to players
     let flag = 0;
-    function chance(){
+    function chance(e){
         let player;
         let cell;
-        if (flag == 0){
-            cell = prompt(`${player1.name} enter the index of the cell you want to mark`);
-            while(gameBoard.board[cell] != null){
-                cell = prompt(`${player1.name}, PLEASE ENTER IN THE CELL THAT IS UNMARKED!`);
+        if(gameBoard.board[e.target.dataset.value] == null){
+            if (flag == 0){
+                cell = e.target.dataset.value;
+                console.log(cell);
+                player = player1;
+                flag = 1;
             }
-            player = player1;
-            flag = 1;
-        }
-        else{
-            cell = prompt(`${player2.name} enter the index of the cell you want to mark`);
-            while(gameBoard.board[cell] != null){
-                cell = prompt(`${player2.name}, PLEASE ENTER IN THE CELL THAT IS UNMARKED!`);
+            else{
+                cell = e.target.dataset.value;
+                console.log(cell);
+                player = player2;
+                flag = 0;
             }
-            player = player2;
-            flag = 0;
-        }
 
-        mark(player, cell);
+            e.target.innerText = player.symbol;
+            mark(player, cell);
+        }  
+         
+        else{
+            console.log('error');
+        }
     }
 
     //function to decide a winner
@@ -83,7 +90,7 @@ const flow = ( () => {
         }
 
         if(win){
-            console.log(`The winner is: ${win}`);
+            alert(`The winner is: ${win}`);
             return true;
         }
 
@@ -93,28 +100,30 @@ const flow = ( () => {
         }
 
         if(total == 9){
-            console.log("it's a draw");
+            alert("It's a draw");
             return true;
         }
-    }
+    };
 
-    //logic to stop after filling all the cells of the board and to give chance to both the players
-    let i = 1;
-    while(!winner() && i == 0){
-        chance();
-    }
-
+//------------------------------------------------------------------------//----------------------------------------------------------------------------//
+        //DOM MANIPULATION
+        const divGameBoard = document.querySelector('.gameBoard');
+        let divCell;
+        for(let i = 0; i < 9; i++){
+            divCell = document.createElement('div');
+    
+            divCell.className = 'cell';
+            //divCell.innerText = 'x';
+            divCell.setAttribute('data-value', i);
+    
+            divGameBoard.appendChild(divCell);
+        }
+    
+        let dValue = document.querySelectorAll('.cell');
+        for(let i = 0; i < 9; i++){
+            dValue[i].addEventListener('click', chance);
+        }      
+    
 })();
 
-
-
-/*----------------------------------------------------//----------------------DOM MANIPULATION-----------------------//----------------------------------------------*/
-
-const divGameBoard = document.querySelector('.gameBoard');
-for(let i = 0; i < 9; i++){
-    const divCell = document.createElement('div');
-    divCell.className = 'cell';
-    divCell.innerText = 'x';
-    divGameBoard.appendChild(divCell);
-}
 
